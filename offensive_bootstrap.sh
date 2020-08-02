@@ -30,7 +30,7 @@ until sudo go get github.com/OJ/gobuster;do
     sleep 1
 done
 
-sudo mv go/bin/gobuster /usr/bin/gobuster  
+sudo mv /root/go/bin/gobuster /usr/bin/gobuster  
 
 ####Install Python3.8
 until sudo apt-get install -y python3.8;do
@@ -74,7 +74,7 @@ until sudo apt-get install -y powershell;do
 done
 
 #### Install AZ
-until sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg;do
+until sudo apt-get install -y ca-certificates curl apt-transport-https lsb-release gnupg;do
     sleep 1
 done
 
