@@ -44,21 +44,7 @@ until sudo pip3 install pipenv;do
     sleep 1
 done
 
-####Install Stormspotter
-until sudo docker run --name stormspotter -p7474:7474 -p7687:7687 -d --env NEO4J_AUTH=neo4j/$password neo4j:3.5.18;do
-    sleep 1
-done
 
-git clone https://github.com/Azure/Stormspotter /home/$name/Stormspotter
-
-
-until pipenv install /home/$name/Stormspotter/.;do
-    sleep 1
-done
-
-#Modify Networking for Accessing Stormspotter Remotely
-sudo sysctl -w net.ipv4.conf.eth0.route_localnet=1
-sudo iptables -t nat -I PREROUTING -p tcp -d 0.0.0.0/0 --dport 8050 -j DNAT --to-destination 127.0.0.1:8050
 
 ####Install Powershell
 
@@ -110,3 +96,19 @@ until sudo git clone https://github.com/NetSPI/MicroBurst.git /home/$name/MicroB
     sleep 1
 done
 
+####Install Stormspotter
+until sudo docker run --name stormspotter -p7474:7474 -p7687:7687 -d --env NEO4J_AUTH=neo4j/$password neo4j:3.5.18;do
+    sleep 1
+done
+
+git clone https://github.com/Azure/Stormspotter /home/$name/Stormspotter
+
+cd /home/$name/Stormspotter/
+
+until pipenv install .;do
+    sleep 1
+done
+
+#Modify Networking for Accessing Stormspotter Remotely
+sudo sysctl -w net.ipv4.conf.eth0.route_localnet=1
+sudo iptables -t nat -I PREROUTING -p tcp -d 0.0.0.0/0 --dport 8050 -j DNAT --to-destination 127.0.0.1:8050
