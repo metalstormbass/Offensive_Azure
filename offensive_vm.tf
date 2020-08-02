@@ -5,6 +5,7 @@ data "template_file" "userdata_setup" {
 
   vars  = {
     name       = "${var.username}"
+    password   = "${var.password}"
     logic = "${file("offensive_bootstrap.sh")}"
   }
 }
