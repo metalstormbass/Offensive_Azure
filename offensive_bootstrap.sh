@@ -33,10 +33,10 @@ done
 sudo mv go/bin/gobuster /usr/bin/gobuster  
 
 ####Install Python3.8
-until sudo apt-get install python3.8;do
+until sudo apt-get install -y python3.8;do
     sleep 1
 done
-until sudo apt install python3-pip; do
+until sudo apt install -y python3-pip; do
     sleep 1
 done
 
