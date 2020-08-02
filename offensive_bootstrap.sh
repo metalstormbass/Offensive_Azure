@@ -58,12 +58,12 @@ done
 
 #Modify Networking for Accessing Stormspotter Remotely
 sudo sysctl -w net.ipv4.conf.eth0.route_localnet=1
-sudo iptables -t nat -I PREROUTING -p tcp -d 0.0.0.0/0 --dport 8050 -j DNAT --to-dest ination 127.0.0.1:8050
+sudo iptables -t nat -I PREROUTING -p tcp -d 0.0.0.0/0 --dport 8050 -j DNAT --to-destination 127.0.0.1:8050
 
 ####Install Powershell
 
 sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
-until sudo apt-get update && sudo apt-get install libicu55;do
+until sudo apt-get update -y && sudo apt-get install -y libicu55;do
     sleep 1
 done
 
@@ -78,7 +78,7 @@ until sudo  dpkg -i packages-microsoft-prod.deb;do
 done
 
 # Update the list of productspip
-until sudo apt-get update;do
+until sudo apt-get update -y;do
     sleep 1
 done
 
@@ -100,7 +100,7 @@ AZ_REPO=$(lsb_release -cs)
 echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" |
     sudo tee /etc/apt/sources.list.d/azure-cli.list
     
-until sudo apt-get install azure-cli;do
+until sudo apt-get install azure-cli -y;do
     sleep 1
 done
 
