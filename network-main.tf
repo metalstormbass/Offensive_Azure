@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "offensive-network-rg" {
 }
 
 # Create the victim network VNET
-resource "azurerm_virtual_network" "victim-network-vnet" {
+resource "azurerm_virtual_network" "offensive-network-vnet" {
   name                = "${var.company}-vnet"
   address_space       = [var.offensive-network-vnet-cidr]
   resource_group_name = azurerm_resource_group.offensive-network-rg.name
