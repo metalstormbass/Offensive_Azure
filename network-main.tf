@@ -2,10 +2,6 @@
 resource "azurerm_resource_group" "offensive-network-rg" {
   name     = "${var.company}-rg"
   location = var.location
-  tags = {
-    application = var.company
-    environment = var.environment
-  }
 }
 
 # Create the victim network VNET
@@ -14,10 +10,6 @@ resource "azurerm_virtual_network" "victim-network-vnet" {
   address_space       = [var.offensive-network-vnet-cidr]
   resource_group_name = azurerm_resource_group.offensive-network-rg.name
   location            = azurerm_resource_group.offensive-network-rg.location
-  tags = {
-    application = var.company
-    environment = var.environment
-  }
 }
 
 # Create a victim subnet for Network
