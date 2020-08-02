@@ -5,7 +5,7 @@ data "template_file" "userdata_setup" {
 
   vars  = {
     name       = "${var.username}"
-    logic = "${file("vuln_bootstrap.sh")}"
+    logic = "${file("offensive_bootstrap.sh")}"
   }
 }
 
@@ -42,7 +42,7 @@ resource "azurerm_public_ip" "offensivepublicip" {
 # Output the public ip of the gateway
 
 output "Attacker_IP" {
-    value = azurerm_public_ip.vulnpublicip.ip_address
+    value = azurerm_public_ip.offensivepublicip.ip_address
 }
 
 
@@ -105,8 +105,6 @@ resource "azurerm_virtual_machine" "main" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
-  tags = {
-    environment = var.environment
-  }
+
 }
 
