@@ -13,7 +13,7 @@ data "template_file" "userdata_setup" {
 
 resource "azurerm_network_security_group" "offensive-linux-nsg" {
   depends_on=[azurerm_resource_group.offensive-network-rg]
-  name = "vuln-web-linux-vm-nsg"
+  name = "offensive-web-linux-vm-nsg"
   location            = azurerm_resource_group.offensive-network-rg.location
   resource_group_name = azurerm_resource_group.offensive-network-rg.name
   security_rule {
@@ -76,7 +76,7 @@ resource "azurerm_virtual_machine" "main" {
   resource_group_name   = azurerm_resource_group.offensive-network-rg.name
   network_interface_ids = [azurerm_network_interface.offensive-ubuntu.id]
   depends_on = [
-    azurerm_network_interface_security_group_association.victim-linux-nsg-int
+    azurerm_network_interface_security_group_association.offensive-linux-nsg-int
   ]
   
   vm_size               = "Standard_DS1_v2"
