@@ -20,7 +20,7 @@ done
 
 ####Install Go
 
-until sudo apt-get install golang;do
+until sudo apt-get install -y golang;do
     sleep 1
 done
 
