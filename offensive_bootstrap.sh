@@ -97,7 +97,7 @@ until sudo git clone https://github.com/NetSPI/MicroBurst.git /home/$name/MicroB
 done
 
 ####Install Stormspotter
-until sudo docker run --name stormspotter -p7474:7474 -p7687:7687 -d --env NEO4J_AUTH=neo4j/$password neo4j:3.5.18;do
+until sudo docker run --name stormspotter -p7474:7474 -p7687:7687 -d --env NEO4J_AUTH=neo4j/neoPASSWD neo4j:3.5.18;do
     sleep 1
 done
 
