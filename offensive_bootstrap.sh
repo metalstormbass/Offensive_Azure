@@ -30,7 +30,12 @@ until sudo go get github.com/OJ/gobuster;do
     sleep 1
 done
 
-sudo mv /root/go/bin/gobuster /usr/bin/gobuster  
+sudo mv /root/go/bin/gobuster /usr/bin/gobuster
+
+####Download Wordlists
+until sudo git clone https://github.com/metalstormbass/KaliLists /home/$name//wordlists;  do
+    sleep 1
+done
 
 ####Install Python3.8
 until sudo apt-get install -y python3.8;do
@@ -43,8 +48,6 @@ done
 until sudo pip3 install pipenv;do
     sleep 1
 done
-
-
 
 ####Install Powershell
 
