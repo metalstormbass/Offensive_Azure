@@ -76,26 +76,33 @@ until sudo apt-get install -y powershell;do
     sleep 1
 done
 
-#### Install AZ
-until sudo apt-get install -y ca-certificates curl apt-transport-https lsb-release gnupg;do
-    sleep 1
-done
-
-curl -sL https://packages.microsoft.com/keys/microsoft.asc |
-    gpg --dearmor |
-    sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
-    
-AZ_REPO=$(lsb_release -cs)
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" |
-    sudo tee /etc/apt/sources.list.d/azure-cli.list
-    
-until sudo apt-get install azure-cli -y;do
-    sleep 1
-done
 
 ####Install Microburst
 
 until sudo git clone https://github.com/metalstormbass/MicroBurst.git /home/$name/MicroBurst;do
+    sleep 1
+done
+
+
+####Add additional Powershell Functionality
+sudo touch /home/$name/scripts/psconfig.ps1
+
+sudo chmod +x /home/$name/scripts/psconfig.ps1
+
+sudo cat <<EOT >> /home/$name/scripts/psconfig.ps1
+if ($PSVersionTable.PSEdition -eq 'Desktop' -and (Get-Module -Name AzureRM -ListAvailable)) {
+    Write-Warning -Message ('Az module not installed. Having both the AzureRM and ' +
+      'Az modules installed at the same time is not supported.')
+} else {
+    Install-Module -Name Az -AllowClobber -Scope AllUsers -Force
+}
+Install-Module -Name AzureAD -Force
+
+Import-Module /home/$name/MicroBurst/MicroBurst.psm1
+
+EOT
+
+until sudo pwsh /home/$name/scripts/psconfig.ps1;do
     sleep 1
 done
 
