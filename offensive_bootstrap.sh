@@ -85,6 +85,7 @@ done
 
 
 ####Add additional Powershell Functionality
+sudo mkdir /home/$name/scripts/
 sudo touch /home/$name/scripts/psconfig.ps1
 
 sudo chmod +x /home/$name/scripts/psconfig.ps1
