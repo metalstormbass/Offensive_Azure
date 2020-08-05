@@ -95,7 +95,7 @@ done
 
 ####Install Microburst
 
-until sudo git clone https://github.com/NetSPI/MicroBurst.git /home/$name/MicroBurst;do
+until sudo git clone https://github.com/metalstormbass/MicroBurst.git /home/$name/MicroBurst;do
     sleep 1
 done
 
