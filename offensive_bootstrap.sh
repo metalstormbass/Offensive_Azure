@@ -91,16 +91,11 @@ sudo touch /home/$name/scripts/psconfig.ps1
 sudo chmod +x /home/$name/scripts/psconfig.ps1
 
 sudo cat <<EOT >> /home/$name/scripts/psconfig.ps1
-if ($PSVersionTable.PSEdition -eq 'Desktop' -and (Get-Module -Name AzureRM -ListAvailable)) {
-    Write-Warning -Message ('Az module not installed. Having both the AzureRM and ' +
-      'Az modules installed at the same time is not supported.')
-} else {
-    Install-Module -Name Az -AllowClobber -Scope AllUsers -Force
-}
+Install-Module -Name Az -AllowClobber -Scope AllUsers -Force
+
 Install-Module -Name AzureAD -Force
 
-Import-Module /home/$name/MicroBurst/MicroBurst.psm1
-
+Install-Module -Name MSOnline -Force
 EOT
 
 until sudo pwsh /home/$name/scripts/psconfig.ps1;do
