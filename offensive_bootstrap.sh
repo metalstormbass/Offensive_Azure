@@ -84,6 +84,24 @@ until sudo git clone https://github.com/metalstormbass/MicroBurst.git /home/$nam
 done
 
 
+#### Install AZ
+until sudo apt-get install -y ca-certificates curl apt-transport-https lsb-release gnupg;do
+    sleep 1
+done
+
+curl -sL https://packages.microsoft.com/keys/microsoft.asc |
+    gpg --dearmor |
+    sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+
+AZ_REPO=$(lsb_release -cs)
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" |
+    sudo tee /etc/apt/sources.list.d/azure-cli.list
+
+until sudo apt-get install azure-cli -y;do
+   sleep 1
+done
+
+
 ####Add additional Powershell Functionality
 sudo mkdir /home/$name/scripts/
 sudo touch /home/$name/scripts/psconfig.ps1
