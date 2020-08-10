@@ -129,7 +129,7 @@ git clone https://github.com/Azure/Stormspotter /home/$name/Stormspotter
 
 cd /home/$name/Stormspotter/
 
-until pipenv install .;do
+until sudo pipenv install .;do
     sleep 1
 done
 
