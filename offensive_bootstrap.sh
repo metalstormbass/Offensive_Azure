@@ -49,6 +49,18 @@ until sudo pip3 install pipenv;do
     sleep 1
 done
 
+
+#### Install Proxy Chains & Tor
+
+sudo apt install proxychains tor -y
+
+#Config Proxychains
+
+sudo sed -i 's/strict_chain/#strict_chain/g' /etc/proxychains.conf
+sudo sed -i 's/#dynamic_chain/dynamic_chain/g' /etc/proxychains.conf
+sudo echo "socks5  127.0.0.1 9050" >> /etc/proxychains.conf
+
+
 ####Install Powershell
 
 sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
